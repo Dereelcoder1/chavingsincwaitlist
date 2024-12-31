@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join the Waitlist | Chavings</title>
   <style>
+    *{
+    margin: 0;
+    padding: 0;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      color: #fff;
+      color: #000;
+      font-weight: bold;
       overflow-x: hidden;
       position: relative;
     }
@@ -35,6 +40,11 @@
     }
 
     .logo {
+      position: absolute;
+      left: 1%;
+      top: 0;
+      width: 200px;
+      height: 200px;
       max-width: 150px;
       margin: 0 auto 20px;
       animation: fadeIn 2s ease;
@@ -131,10 +141,11 @@
     <!-- Fallback image in case video doesn't load -->
     <img src="fallback-image.jpg" alt="Fallback Image" />
   </video>
+  <img src="logo.png" alt="Chavings Logo" class="logo">
 
   <div class="container">
-    <img src="logo.jpg" alt="Chavings Logo" class="logo">
-    <h1>🎈 Join <span style="color: #020202;">the</span> Waitlist! 🎉</h1>
+    
+    <h1>🎈 Join the Waitlist! 🎉</h1>
 
     <!-- Countdown Timer -->
     <div class="countdown" id="countdown">
@@ -152,7 +163,7 @@
     </form>
 
     <div class="footer">
-      <p>We respect your privacy. <a href="#" style="color: #3106ec;">Learn more</a></p>
+      <p style="color: black; font-weight: bold;">We respect your privacy. <a href="#" style="color: #000;">Learn more</a></p>
     </div>
   </div>
 
