@@ -9,34 +9,84 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #000;
       color: #fff;
+      overflow-x: hidden;
+      position: relative;
     }
+
+    /* Video background styling */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Ensures the video stays in the background */
+    }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
       padding: 50px 20px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
+
     .logo {
       max-width: 150px;
       margin: 0 auto 20px;
+      animation: fadeIn 2s ease;
     }
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
+      animation: bounceIn 1.5s ease;
     }
+
+    .countdown {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      display: inline-block;
+      animation: fadeIn 2s ease;
+    }
+
+    .countdown span {
+      display: inline-block;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 20px;
-      line-height: 1.5;
+      line-height: 1.6;
+      animation: fadeInUp 1.5s ease;
     }
+
     form {
       margin-top: 20px;
     }
+
     input[type="email"] {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
       font-size: 1rem;
       border-radius: 5px;
@@ -44,54 +94,71 @@
       background: #111;
       color: #fff;
     }
+
     button {
       width: 100%;
       padding: 12px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       border: none;
       border-radius: 5px;
-      background-color: #fff;
-      color: #000;
+      background-color: rgb(38, 0, 255);
+      color: #fff;
       cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: all.3s ease-in-out;
     }
-    button:hover {
-      background-color: #ccc;
-      color: #000;
+
+    button:hover{
+      color: #fff;
+      background-color: #000;
     }
     .footer {
       margin-top: 30px;
       font-size: 0.9rem;
       color: #aaa;
     }
+
     .footer a {
       color: #fff;
       text-decoration: none;
     }
-    .footer a:hover {
-      text-decoration: underline;
-    }
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo Section -->
-    <img src="logo.jpg" alt="Chavings Logo" class="logo">
+  <!-- Video Background -->
+  <video class="video-background" autoplay muted loop>
+    <source src="background.mp4" type="video/mp4">
+    <!-- Fallback image in case video doesn't load -->
+    <img src="fallback-image.jpg" alt="Fallback Image" />
+  </video>
 
-    <h1>Be the First to Join</h1>
-    <p>Exciting things are coming soon to your neighborhood! Join the waitlist to get early access to our platform that connects you to jobs or workers in your area.</p>
+  <div class="container">
+    <img src="logo.jpg" alt="Chavings Logo" class="logo">
+    <h1>🎈 Join <span style="color: #020202;">the</span> Waitlist! 🎉</h1>
+
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">
+      <span id="days">00</span> days 
+      <span id="hours">00</span> hours 
+      <span id="minutes">00</span> minutes 
+      <span id="seconds">00</span> seconds
+    </div>
+
+    <p>🌟Exciting things are coming soon to your neighborhood! Join the waitlist to get early access to our platform that connects you to jobs or workers in your area.. Be the first to experience our platform that connects you to jobs or workers in your area. 🚀</p>
+
     <form id="contact-form">
-      <input type="email" name="email" placeholder="Enter your email address" required>
-      <button type="submit" id="submit-button">Join the Waitlist</button>
+      <input type="email" name="email" placeholder="📧 Enter your email address" required>
+      <button type="submit" id="submit-button">Join Now 💌</button>
     </form>
+
     <div class="footer">
-      <p>We respect your privacy. <a href="#">Learn more</a></p>
+      <p>We respect your privacy. <a href="#" style="color: #3106ec;">Learn more</a></p>
     </div>
   </div>
-</body>
-
 
   <script>
+    // handle form submission
+
     const form = document.getElementById('contact-form');
   const submitButton = document.getElementById('submit-button');
 
@@ -133,5 +200,34 @@
     }
   });
 
+
+    // The target date ^mths from now
+    const targetDate = new Date("2025-06-01T00:00:00Z");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🎉 It's here! 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      // Update the countdown display
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
+</body>
 </html>
